@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>
+		$interval, $timeout
+	</title>
+</head>
+<script src="Scripts/angular.min.js"></script>
+<body>
+	  <div ng-controller="myController">
+	  	<b ng-repeat="item in items">{{item}}</b>
+	  	<hr/>
+
+	  	<input type='text' ng-model="something"/>
+
+	  </div>
+
+	<script>
+	   angular.module("myApp", []).
+	       controller('myController', ['$scope', '$interval', '$timeout',
+	        function($scope, $interval){
+	        	$scope.items = [];
+	        	var i = 0;
+	        	setInterval(function(){
+	        		$scope.items.push(i++);
+	        		$scope.$apply(); // we called the $apply explicitly because setInterval is JS method and it's under DOM window , to overcome this issue, we can use $interval here istead of setInterval
+
+
+	        	}, 500)
+	       	
+	       }])
+
+	</script>
+
+</body>
+</html>
