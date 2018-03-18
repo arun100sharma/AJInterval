@@ -11,7 +11,8 @@
 	  	<b ng-repeat="item in items">{{item}}</b>
 	  	<hr/>
 
-	  	<input type='text' ng-model="something"/>
+	  	<input type='text' ng-model="something"/> 
+	    <!-- we used this something to get the item values on screen, as we type something it was giving value  -->
 
 	  </div>
 
@@ -21,9 +22,9 @@
 	        function($scope, $interval){
 	        	$scope.items = [];
 	        	var i = 0;
-	        	setInterval(function(){
+	        	$interval(function(){
 	        		$scope.items.push(i++);
-	        		$scope.$apply(); // we called the $apply explicitly because setInterval is JS method and it's under DOM window , to overcome this issue, we can use $interval here istead of setInterval
+	        		//$scope.$apply(); // we called the $apply explicitly because setInterval is JS method and it's under DOM window , to overcome this issue, we can use $interval here istead of setInterval
 
 
 	        	}, 500)
