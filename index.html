@@ -8,6 +8,7 @@
 <script src="Scripts/angular.min.js"></script>
 <body>
 	  <div ng-controller="myController">
+	  	<button ng-click="stop()">Stop</button>
 	  	<b ng-repeat="item in items">{{item}}</b>
 	  	<hr/>
 
@@ -22,12 +23,17 @@
 	        function($scope, $interval){
 	        	$scope.items = [];
 	        	var i = 0;
-	        	$interval(function(){
+	        	var promise = $interval(function(){
 	        		$scope.items.push(i++);
 	        		//$scope.$apply(); // we called the $apply explicitly because setInterval is JS method and it's under DOM window , to overcome this issue, we can use $interval here istead of setInterval
-
-
 	        	}, 500)
+
+	        	$scope.stop = function(){
+
+	        		$interval.cancel(promise);
+	        	}
+
+	        	// $interval technically returns a promise method.
 	       	
 	       }])
 
