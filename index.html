@@ -20,17 +20,18 @@
 	<script>
 	   angular.module("myApp", []).
 	       controller('myController', ['$scope', '$interval', '$timeout',
-	        function($scope, $interval){
+	        function($scope, $interval, $timeout){
 	        	$scope.items = [];
 	        	var i = 0;
-	        	var promise = $interval(function(){
-	        		$scope.items.push(i++);
-	        		//$scope.$apply(); // we called the $apply explicitly because setInterval is JS method and it's under DOM window , to overcome this issue, we can use $interval here istead of setInterval
-	        	}, 500)
+	        	var promise = $timeout(function(){
+	        		$scope.items.push("I am here");
+	        		//$scope.$apply(); // we called timeout method which prints the msg after 1 second
+	        	}, 1000)
 
 	        	$scope.stop = function(){
 
-	        		$interval.cancel(promise);
+	        		$timeout.cancel(promise);
+	        		// We can cancel the timeout function by take promise of timeout
 	        	}
 
 	        	// $interval technically returns a promise method.
